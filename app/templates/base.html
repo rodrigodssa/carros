@@ -1,103 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{% endblock %}</title>
-  <style>
-    body {
-        font-family: 'Open Sans', sans-serif;
-        background-color: #f7f7f7;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RD Multimarcas - Cadastro e listagem de carros">
+    <meta name="author" content="RD Multimarcas">
+    <title>{% block title %}RD Multimarcas{% endblock %}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
 
-    header {
-        background-color: #0096c7;
-        color: #fff;
-        text-align: center;
-    }
+        header {
+            background-color: #0096c7;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    footer {
-        background-color: #ccc;
-        color: #333;
-        padding: 20px;
-        text-align: center;
-    }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
 
-    nav {
-        background-color: #0096c7;
-        color: #fff;
-        height: 50px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+        footer {
+            background-color: #ccc;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
 
-    nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-    }
+        nav {
+            background-color: #0096c7;
+            color: #fff;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    nav ul li {
-        margin: 0 10px;
-    }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
 
-    nav ul li a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-        padding: 15px;
-        transition: all 0.3s ease;
-    }
+        nav ul li {
+            margin: 0 15px;
+        }
 
-    nav ul li a:hover {
-        background-color: #32bbe8;
-    }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
 
-    nav ul li.active a {
-        background-color: #666;
-    }
+        nav ul li a:hover {
+            background-color: #32bbe8;
+            border-radius: 5px;
+        }
 
-    nav ul li.active a:hover {
-        background-color: #999;
-    }
+        nav ul li.active a {
+            background-color: #666;
+            border-radius: 5px;
+        }
 
-  </style>
+        nav ul li.active a:hover {
+            background-color: #999;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
+<header>
+    <h1>RD Multimarcas</h1>
     <nav>
-      <ul>
-        {% if user.is_authenticated %}
-          <li>Olá, {{ user.username }}</li>
-          <li><a href="{% url 'new_car' %}">Cadastrar Carro</a></li>
-        {% endif %}
-        {% if not user.is_authenticated %}
-          <li><a href="{% url 'register' %}">Cadastre-se</a></li>
-          <li><a href="{% url 'login' %}">Login</a></li>
-        {% endif %}
-
-        <li><a href="{% url 'cars_list' %}">Carros</a></li>
-
-
-        {% if user.is_authenticated %}
+        <ul>
+            {% if user.is_authenticated %}
+            <li>Olá, {{ user.username }}</li>
+            <li><a href="{% url 'new_car' %}">Cadastrar Carro</a></li>
+            {% else %}
+            <li><a href="{% url 'register' %}">Cadastre-se</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+            <li><a href="{% url 'cars_list' %}">Carros</a></li>
+            {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Sair</a></li>
-        {% endif %}
-      </ul>
+            {% endif %}
+        </ul>
     </nav>
-  </header>
+</header>
 
-  <main>
+<main>
     {% block content %}
+    <p>Bem-vindo ao sistema de gerenciamento de carros da RD Multimarcas. Aqui você pode cadastrar e visualizar os
+        veículos disponíveis.</p>
     {% endblock %}
-  </main>
+</main>
 
-  <footer>
-    <p>&copy; 2024 RD Multimarcas</p>
-  </footer>
+<footer>
+    <p>&copy; 2024 RD Multimarcas. Todos os direitos reservados.</p>
+    <p>Desenvolvido por Rodrigo D.S.S.A.</p>
+</footer>
 </body>
 </html>
