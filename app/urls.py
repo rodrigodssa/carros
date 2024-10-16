@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from accounts.views import register_view, login_view, logout_view
-from cars.views import CarsListView, NewCarCreateView
+from cars.views import CarsListView, NewCarCreateView, CarDetailView
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
@@ -12,4 +12,5 @@ urlpatterns = [
                   path('logout/', logout_view, name='logout'),
                   path('cars/', CarsListView.as_view(), name='cars_list'),
                   path('new_car/', NewCarCreateView.as_view(), name='new_car'),
+                  path('car/<int:pk>/', CarDetailView.as_view(), name='car_detail'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
