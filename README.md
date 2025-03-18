@@ -16,7 +16,6 @@ Este projeto foi desenvolvido durante o curso Django Master, utilizando o Django
 
 Além dos conceitos básicos abordados no curso, implementei algumas melhorias e novas funcionalidades no projeto original:
 
-- Integração com API Gemini e OpenAI: Automatizei a geração das descrições dos carros utilizando a API do OpenAI e, como bônus, integrei também a API do Gemini.
 - Melhoria no Design dos Templates: Adaptei os templates para um design mais moderno e responsivo.
 - Aprimoramento dos Models: Otimizei a estrutura dos models para suportar novas funcionalidades e melhorar o desempenho.
 
